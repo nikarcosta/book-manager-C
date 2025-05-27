@@ -19,34 +19,47 @@ void append_data_to_file(struct book *books, int n);
 
 bool file_exists(const char *filename);
 
+void add_book();
+
+void view_books();
+
+void delete_book();
+
+void edit_book();
+
 int main(void) {
-    int n;
-    printf("How many books?\n");
-    scanf("%d", &n);
-    getchar();
+    int option;
+    int run = 1;
 
-    struct book *books = malloc(sizeof(struct book) * n);
+    while (run) {
+        printf("Welcome To Your Book Manager!\n");
+        printf("Enter the number corresponding to one of the options below to continue: \n");
+        printf("1 - Add book;\n");
+        printf("2 - Delete book;\n");
+        printf("3 - View books;\n");
+        printf("0 - Exit the application;\n");
 
-    for (int i = 0; i < n; i++) {
-        printf("Enter data for book %d\n", i + 1);
-        set_book_data(&books[i]);
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1:
+                add_book();
+                break;
+            case 2:
+                delete_book();
+                break;
+            case 3:
+                view_books();
+                break;
+            case 0:
+                run = 0;
+                break;
+            default:
+                printf("Enter a valid option!");
+
+        }
     }
 
-    for (int i = 0; i < n; i++) {
-        printf("Book %d: \nTitle: %s \nAuthor: %s \nPrice: $%.2lf\n",
-            i + 1, books[i].title,
-            books[i].author,
-            books[i].price );
-    }
-
-    if (file_exists(FILENAME)) {
-        append_data_to_file(books, n);
-    } else {
-        create_file(books, n);
-    }
-
-
-    free(books);
     return 0;
 }
 
@@ -121,3 +134,39 @@ void append_data_to_file(struct book *books, int n) {
     printf("New data appended to file and saved successfully. :) \n");
 
 }
+
+void add_book() {
+    int n;
+    printf("How many books?\n");
+    scanf("%d", &n);
+    getchar();
+
+    struct book *books = malloc(sizeof(struct book) * n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter data for book %d\n", i + 1);
+        set_book_data(&books[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        printf("Book %d: \nTitle: %s \nAuthor: %s \nPrice: $%.2lf\n",
+            i + 1, books[i].title,
+            books[i].author,
+            books[i].price );
+    }
+
+    if (file_exists(FILENAME)) {
+        append_data_to_file(books, n);
+    } else {
+        create_file(books, n);
+    }
+
+
+    free(books);
+}
+
+void view_books(){}
+
+void delete_book(){}
+
+void edit_book(){}
