@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-char *FILENAME = "";
+char *FILENAME = "yourPathHere/books.txt";
 
 struct book {
     char title[100];
@@ -165,7 +165,29 @@ void add_book() {
     free(books);
 }
 
-void view_books(){}
+void view_books() {
+    FILE *fPtr;
+    char ch;
+
+    fPtr = fopen(FILENAME, "r");
+
+    if (fPtr == NULL) {
+        printf("Unable to open file.\n");
+        printf("Please check whether file exists and you have reading privileges.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    do
+    {
+        ch = fgetc(fPtr);
+
+        putchar(ch);
+
+    } while(ch != EOF);
+
+    fclose(fPtr);
+
+}
 
 void delete_book(){}
 
