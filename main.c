@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-char *FILENAME = "yourPathHere/books.txt";
+char *FILENAME = "/home/monique/CLionProjects/untitled/books.txt";
 
 struct book {
     char title[100];
@@ -26,6 +26,8 @@ void view_books();
 void delete_book();
 
 void edit_book();
+
+int load_books(struct book **books_out);
 
 int main(void) {
     int option;
@@ -192,3 +194,44 @@ void view_books() {
 void delete_book(){}
 
 void edit_book(){}
+
+int load_books(struct book **books_out) {
+    FILE *fPtr = fopen(FILENAME, "r");
+    if (fPtr == NULL) {
+        printf("Could not open file for reading.\n");
+        return 0;
+    }
+
+    int capacity = 10;
+    int count = 0;
+    struct book *books = malloc(capacity * sizeof(struct book));
+
+    char line[256];
+    while (fgets(line, sizeof(line), fPtr)) {
+        // Skip "Book N:" line
+        if (strncmp(line, "Book", 4) == 0) {
+            if (!fgets(line, sizeof(line), fPtr)) break;
+
+            if (count >= capacity) {
+                capacity *= 2;
+                books = realloc(books, capacity * sizeof(struct book));
+            }
+
+            char *title_start = strstr(line, "Title: ");
+            char *author_start = strstr(line, "Author: ");
+            char *price_start = strstr(line, "Price: ");
+
+            if (title_start && author_start && price_start) {
+                sscanf(title_start, "Title: %[^|]| Author: %[^|]| Price: %lf",
+                       books[count].title,
+                       books[count].author,
+                       &books[count].price);
+                count++;
+            }
+        }
+    }
+
+    fclose(fPtr);
+    *books_out = books;
+    return count;
+}
