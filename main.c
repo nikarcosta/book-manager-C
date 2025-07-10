@@ -34,7 +34,18 @@ int main(void) {
     int run = 1;
 
     while (run) {
-        printf("Welcome To Your Book Manager!\n");
+
+        printf("\n ____              _      __  __ ");
+        printf("\n|  _ \\            | |    |  \\/  |");
+        printf("\n| |_) | ___   ___ | | __ | \\  / | __ _ _ __   __ _  __ _  ___ _ __ ");
+        printf("\n|  _ < / _ \\ / _ \\| |/ / | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '__|");
+        printf("\n| |_) | (_) | (_) |   <  | |  | | (_| | | | | (_| | (_| |  __/ |");
+        printf("\n|____/ \\___/ \\___/|_|\\_\\ |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|");
+        printf("\n                                                    __/ |");
+        printf("\n                                                   |___/");
+
+
+        printf("\nWelcome To Your Book Manager!\n");
         printf("Enter the number corresponding to one of the options below to continue: \n");
         printf("1 - Add book;\n");
         printf("2 - Delete book;\n");
