@@ -202,7 +202,29 @@ void view_books() {
 
 }
 
-void delete_book(){}
+void delete_book() {
+    getchar();
+    printf("Enter the title of the book you want to delete: \n");
+    char book_title_to_delete[256];
+    fgets(book_title_to_delete, sizeof(book_title_to_delete),stdin);
+
+    struct book *my_books = NULL;
+    int total_books = load_books(&my_books);
+
+    total_books--;
+
+    for (int i = 0; i < total_books; i++) {
+        if (my_books->author == book_title_to_delete) {
+            *my_books[i].title = *my_books[i+1].title;
+            *my_books[i].author = *my_books[i + 1].author;
+            my_books[i].price = my_books[i+1].price;
+        }
+    }
+
+    create_file(my_books, total_books);
+
+    printf("Book deleted successfully!");
+}
 
 void edit_book(){}
 
