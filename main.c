@@ -29,6 +29,8 @@ void edit_book();
 
 int load_books(struct book **books_out);
 
+void return_to_menu();
+
 int main(void) {
     int option;
     int run = 1;
@@ -176,6 +178,8 @@ void add_book() {
 
 
     free(books);
+
+    return_to_menu();
 }
 
 void view_books() {
@@ -199,6 +203,8 @@ void view_books() {
     } while(ch != EOF);
 
     fclose(fPtr);
+
+    return_to_menu();
 
 }
 
@@ -224,6 +230,8 @@ void delete_book() {
     create_file(my_books, total_books);
 
     printf("Book deleted successfully!");
+
+    return_to_menu();
 }
 
 void edit_book(){}
@@ -267,4 +275,16 @@ int load_books(struct book **books_out) {
     fclose(fPtr);
     *books_out = books;
     return count;
+}
+
+void return_to_menu() {
+    printf("Press ENTER to return to menu");
+
+    getchar();
+
+    int c;
+
+    do {
+        c = getchar();
+    } while (c != '\n');
 }
