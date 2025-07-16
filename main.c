@@ -114,8 +114,7 @@ void create_file(struct book *books, int n) {
     }
 
     for (int i = 0; i < n; i++) {
-        fprintf(fPtr, "Book %d:\nTitle: %s| Author: %s | Price: %.2lf\n\n",
-                i + 1,
+        fprintf(fPtr, "Book:\nTitle: %s| Author: %s | Price: %.2lf\n\n",
                 books[i].title,
                 books[i].author,
                 books[i].price);
@@ -137,8 +136,7 @@ void append_data_to_file(struct book *books, int n) {
     }
 
     for (int i = 0; i < n; i++) {
-        fprintf(fPtr, "Book %d:\nTitle: %s| Author: %s | Price: %.2lf\n\n",
-                i + 1,
+        fprintf(fPtr, "Book:\nTitle: %s| Author: %s | Price: %.2lf\n\n",
                 books[i].title,
                 books[i].author,
                 books[i].price);
@@ -167,8 +165,8 @@ void add_book() {
     }
 
     for (int i = 0; i < n; i++) {
-        printf("Book %d: \nTitle: %s \nAuthor: %s \nPrice: $%.2lf\n",
-            i + 1, books[i].title,
+        printf("Book: \nTitle: %s \nAuthor: %s \nPrice: $%.2lf\n",
+            books[i].title,
             books[i].author,
             books[i].price );
     }
