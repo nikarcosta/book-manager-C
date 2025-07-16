@@ -225,18 +225,25 @@ void delete_book() {
     int total_books = load_books(&my_books);
 
     total_books--;
+    bool book_found = false;
 
     for (int i = 0; i < total_books; i++) {
         if (my_books->author == book_title_to_delete) {
             *my_books[i].title = *my_books[i+1].title;
             *my_books[i].author = *my_books[i + 1].author;
             my_books[i].price = my_books[i+1].price;
+
+            book_found = true;
         }
     }
 
-    create_file(my_books, total_books);
+    if (book_found) {
+        create_file(my_books, total_books);
 
-    printf("Book deleted successfully!");
+        printf("Book deleted successfully!\n");
+    } else {
+        printf("Book not found!\n");
+    }
 
     return_to_menu();
 }
