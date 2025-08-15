@@ -224,20 +224,22 @@ void delete_book() {
     printf("Enter the title of the book you want to delete: \n");
     char book_title_to_delete[256];
     fgets(book_title_to_delete, sizeof(book_title_to_delete),stdin);
+    book_title_to_delete[strcspn(book_title_to_delete, "\n")] = '\0';
 
     struct book *my_books = NULL;
     int total_books = load_books(&my_books);
 
-    total_books--;
     bool book_found = false;
 
     for (int i = 0; i < total_books; i++) {
-        if (my_books->author == book_title_to_delete) {
-            *my_books[i].title = *my_books[i+1].title;
-            *my_books[i].author = *my_books[i + 1].author;
-            my_books[i].price = my_books[i+1].price;
+        if (strcmp(my_books[i].title, book_title_to_delete) == 0) {
+            for (int j = i; j < total_books - 1; j++ ) {
+                my_books[j] = my_books[j+1];
+            }
 
+            total_books--;
             book_found = true;
+            break;
         }
     }
 
@@ -249,6 +251,7 @@ void delete_book() {
         printf("Book not found!\n");
     }
 
+    free(my_books);
     return_to_menu();
 }
 
@@ -283,13 +286,11 @@ void edit_book() {
 
     switch (edit_option) {
         case 1:
-            getchar();
             printf("Enter new title:\n");
             fgets(title, sizeof(title), stdin);
             title[strcspn(title, "\n")] = '\0';
             break;
         case 2:
-            getchar();
             printf("Enter new author:\n");
             fgets(author, sizeof(author), stdin);
             author[strcspn(author, "\n")] = '\0';
