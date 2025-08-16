@@ -1,0 +1,9 @@
+Book:
+Title: Harry Potter| Author: J.K. Rowling | Price: 83.00
+
+Book:
+Title: Polyanna| Author: Someone Else | Price: 21.00
+
+Book:
+Title: Superinteligence| Author: Unknown Author | Price: 33.00
+
