@@ -1,8 +1,6 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-extern const char *FILENAME;
-
 struct book {
     char title[100];
     char author[50];

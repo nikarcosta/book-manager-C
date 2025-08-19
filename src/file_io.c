@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../include/book.h"
-#include "../include/config.h"
+#include "config.h"
 
 void set_book_data(struct book *b) {
     printf("Enter the title of the book:\n");

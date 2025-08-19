@@ -4,7 +4,7 @@
 #include "../include/book.h"
 #include "../include/file_io.h"
 #include "../include/utils.h"
-#include "../include/config.h"
+#include "config.h"
 
 void add_book() {
     printf("*******************************************************************\n");
@@ -48,6 +48,7 @@ void view_books() {
     FILE *fPtr;
     char ch;
 
+    printf("Trying to open file: %s\n", BOOKS_FILE);
     fPtr = fopen(BOOKS_FILE, "r");
 
     if (fPtr == NULL) {
